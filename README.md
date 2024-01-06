@@ -37,14 +37,69 @@ ROS2를 사용하는 프로젝트의 경우 보통 아래와 같은 폴더 조�
      - ```git push origin feature/slam```
      - ```git flow publish slam```
      - 위 두 명령어는 같은 역할을 하지만 위에는 기존의 git이고 아래는 git-flow입니다.
-   - 장점: 새로운 Git flow를 공부할 필요없다. 신경 쓸 필요도 없다.
-   - 단점: 안그래도 귀찮은 git 작업을 더 많이 해야한다. (git-flow방식을 사용하는 것 보다 해야할게 더 많습니다.)
+
 2. **git-flow 방식**:
    - 내가 Git flow 방식이 어떤건지 이해하고 있으며 git-flow까지 사용할 줄 안다.
-   - 장점: 기존의 git 방식보다 더 편하다.
-   - 단점: git이랑 같이 쓰는거라 헷갈릴 수 있다.
 
-## i) git 방법
+## i) git 방식
+1. develop 브랜치 clone 하기: ```git clone -b develop ```
+2. develop 브랜치 업데이트: ```git pull origin develop```
+3. 생성할 feature 브랜치 만들기: ```git branch feature/slam```
+4. feature/slam 브랜치로 이동하여 코드작성
+   - ```git checkout feature/slam```
+   - 이후 개발 진행하고 add랑 commit까지 완료.
+     - ```git add <file>```
+      - ```git commit -m "FEAT: Add EKF localization"```
+5. 개발이 완료되면 develop 브랜치에 합치기(방법 2개)
+   1. local 컴퓨터에서 merge 후 push: 동료들의 QA 없이 진행하는 방법. 본인코드 본인이 책임지는 것.
+   ```git
+   git checkout develop
+   git merge feature/slam
+   git push origin develop
+   ```
+   2. merge하지 않고 push 후 PR(Pull Request): **QA 후 Merge**. 이 때 Merge는 코드 작성자가 진행합니다. Remote에서 merge가 되었으므로 PR 후에는 Local에서의 feature 브랜치는 삭제합니다.
+   ```git
+   git push origin feature/slam
+   git branch -D feature/slam
+   ```
+매번 새롭게 코드를 작성할 때 마다 2~5번 과정을 반복하면 됩니다.
+
 ## ii) git-flow 방법
+이거 사용할 줄 안다는 것은 이미 위 방법은 충분히 할 줄 알고, 관리까지 할 수 있는 실력이 되는거니까 구체적 설명없이 명령어로 대체합니다.
+```git
+git flow init
+git flow feature start slam
+git add <>
+git commit -m "~~~~"
+
+git flow feature finish slam
+OR
+git flow feature publish slam && git branch -D feature/slam
+
+git pull develop
+```
 
 # 3. 사용 시 주의할점
+
+주의사항은 꼭 숙지 해 주세요. 생각 날 때 마다 업데이트 하겠습니다.(멘션할 예정이니 README가 바뀌면 알람이 갈거에요)
+
+### i) feature 브랜치는 열린 상태로 오래 유지되면 안된다.
+feature 브랜치가 열린 상태로 있다는 것은 develop 브랜치에 Merge되지 않은 상태로 깃헙이든 본인 local이든 존재한다는 것입니다. 닫혀있다는 것은 Merge가 되었다는 것이구요. feature 브랜치를 열린 생태로 너무 오래(1주이상) 두는 것은 바람직한 사용법이 아닙니다.
+
+### ii) 공유 브랜치 주의사항
+만약 feature/vision이라는 브랜치를 만들었고, 이는 나만 작업하는 브랜치가 아닌 여러명이 작업하는 브랜치라고 가정합시다. 이렇게 되면 당연히 local에서 merge하는게 아니라 GitHub에 올려야 합니다. **공유브랜치에서 작업할 일이 생긴다면 좀 까다롭습니다.** 각자 개발해서 올리는 기존의 방식과 달리 함께 해야하니까요. 이 경우가 캡스톤에서 발생한다면, 그 때가서 어떻게 할 지 담당자들 간의 얘기가 필요합니다.
+
+### iii) 공유 파일 주의사항
+예를들어 ```hive_navigation.launch``` 파일을 여려명이서 작업한다고 가정합시다. 이 때는 각자 branch를 만드는 것이 아닌 공유 브랜치에서 작업 해야합니다. 구체적으로, **1번사람**이 100~200줄 사이를 수정하고, **2번사람**이 400~500줄 사이를 수정해야 하는데 각자 다른 branch에서 수정하고 merge or PR을 하면 충돌납니다. 경험상 Merge 충돌이 가장 자주 일어나는 경우가 ***"한 파일을 서로 다른 두 브랜치에서 작업하고 합칠 때*** 입니다. 다른 여려 경우도 있지만 이 경우가 제일 흔한거 같아요.
+
+### iv)
+
+# 4. 기타
+필수는 아니지만 하면 좋은 것들 입니다. 생각 날 때 마다 업데이트 하겠습니다.
+
+### i)Naming Convention
+변수명, 클래스명, 함수명 등등 이름짓기 규칙이 있습니다. 각자 스타일이 다 다르기 때문에 코드리뷰할 때 힘드니까 통일하는 것을 추천합니다. 통일할거면 어떻게 통일할지 정해야 하긴 합니다. 참고로 저는 아래 링크에서 설명한 대로 코드를 짭니다.
+
+[https://rthrobot.tistory.com/2](https://rthrobot.tistory.com/2)
+
+### ii)
