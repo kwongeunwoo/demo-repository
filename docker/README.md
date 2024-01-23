@@ -1,13 +1,19 @@
 # Docker support
-We offer two main Dockerfiles: i) Table robot (Raspberry Pi 4), ii) Vision-Platooning system (ex. Intel Nuc)
+We offer Dockerfile about the table robot.
 
-In the actual implementation, the two images run on different computers(Raspberry and Nuc). The docker manager tried to manage it in an integrated way, but failed. If there is a better way to use the docker, please let [@taehun-ryu](https://github.com/taehun-ryu) know.
+## Prerequisites
+- X11-forwarding
+- nvidia-docker
 
-## 1. Table robot
+## How to build image
 ```bash
 cd docker
-docker build --no-cache --force-rm --build-arg HOST_USER=$USER -t IMAGENAME:TAG .
+docker build --no-cache --force-rm --build-arg HOST_USER=$USER -t [YOUR IMAGENAME:TAG] .
 ```
 
-## 2. Vision-Platooning system
-we will upload it soon.
+## How to run container
+```bash
+cd docker
+bash run_docker.sh [YOUR CONTAINER NAME] [YOUR IMAGE NAME:TAG]
+```
+\[YOUR IMAGE NAME:TAG]\ must be the same name you used when image building.
