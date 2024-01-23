@@ -44,13 +44,14 @@ ROS2를 사용하는 프로젝트의 경우 보통 아래와 같은 폴더 조�
 ## i) git 방식
 1. develop 브랜치 clone 하기: ```git clone -b develop ```
 2. develop 브랜치 업데이트: ```git pull origin develop```
-3. 생성할 feature 브랜치 만들기: ```git branch feature/slam```
-4. feature/slam 브랜치로 이동하여 코드작성
+3. remote에 없는 브랜치 삭제: ```git fetch --prune```
+4. 생성할 feature 브랜치 만들기: ```git branch feature/slam```
+5. feature/slam 브랜치로 이동하여 코드작성
    - ```git checkout feature/slam```
    - 이후 개발 진행하고 add랑 commit까지 완료.
      - ```git add <file>```
       - ```git commit -m "FEAT: Add EKF localization"```
-5. 개발이 완료되면 develop 브랜치에 합치기(방법 2개)
+6. 개발이 완료되면 develop 브랜치에 합치기(방법 2개)
    1. local 컴퓨터에서 merge 후 push: 동료들의 QA 없이 진행하는 방법. 본인코드 본인이 책임지는 것.
    ```git
    git checkout develop
@@ -64,7 +65,7 @@ ROS2를 사용하는 프로젝트의 경우 보통 아래와 같은 폴더 조�
    git branch -D feature/slam
    ```
 
-매번 새롭게 코드를 작성할 때 마다 2~5번 과정을 반복하면 됩니다.
+매번 새롭게 코드를 작성할 때 마다 2~6번 과정을 반복하면 됩니다.
 
 ## ii) git-flow 방법
 이거 사용할 줄 안다는 것은 이미 위 방법은 충분히 할 줄 알고, 관리까지 할 수 있는 실력이 되는거니까 구체적 설명없이 명령어로 대체합니다.
