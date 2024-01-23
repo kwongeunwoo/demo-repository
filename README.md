@@ -3,7 +3,7 @@
 
 목차는 아래와 같이 되어있습니다.
 1. 패키지 구조화
-2. **Git 사용방식** (핵심!)
+2. **각자 해야할 일** (핵심!)
 3. 사용 시 주의할점
 4. 기타
 
@@ -28,7 +28,8 @@ ROS2를 사용하는 프로젝트의 경우 보통 아래와 같은 폴더 조�
 
 [https://automaticaddison.com/naming-and-organizing-packages-in-large-ros-2-projects/#google_vignette](https://automaticaddison.com/naming-and-organizing-packages-in-large-ros-2-projects/#google_vignette)
 
-# 2. Git 사용방식
+# 2. 각자 해야할 일
+## 2.1 Git 관점
 사용법은 크게 2가지로 나뉩니다. 설명을 읽고 본인에게 맞는 사용법을 정하시면 됩니다.
 1. **git 방식**
    - Git flow 방식이 이해가 잘 안된다 or 아예 모른다.
@@ -41,7 +42,7 @@ ROS2를 사용하는 프로젝트의 경우 보통 아래와 같은 폴더 조�
 2. **git-flow 방식**:
    - 내가 Git flow 방식이 어떤건지 이해하고 있으며 git-flow까지 사용할 줄 안다.
 
-## i) git 방식
+### 2.1.1 git 방식
 1. develop 브랜치 clone 하기: ```git clone -b develop ```
 2. develop 브랜치 업데이트: ```git pull origin develop```
 3. remote에 없는 브랜치 삭제: ```git fetch --prune```
@@ -67,7 +68,7 @@ ROS2를 사용하는 프로젝트의 경우 보통 아래와 같은 폴더 조�
 
 매번 새롭게 코드를 작성할 때 마다 2~6번 과정을 반복하면 됩니다.
 
-## ii) git-flow 방법
+### 2.1.2 git-flow 방법
 이거 사용할 줄 안다는 것은 이미 위 방법은 충분히 할 줄 알고, 관리까지 할 수 있는 실력이 되는거니까 구체적 설명없이 명령어로 대체합니다.
 ```git
 git flow init
@@ -81,21 +82,33 @@ git flow feature publish slam && git branch -D feature/slam
 
 git pull develop
 ```
+## 2.2 PR 방법
+PR방식은 총 3개로 나뉩니다.
+1. Create a merge commit(Merge pull request)
+2. Squash and merge
+3. Rebase and merge
+
+3개에 대한 자세한 설명은 아래 5분정도 되는 영상을 보세요!
+[https://www.youtube.com/watch?v=UcZ3qvapfWw](https://www.youtube.com/watch?v=UcZ3qvapfWw)
+
+각자가 개발한 commit log에 맞게 3가지 중 선택하면 좋을 거 같아요!
+잘 모르겠다 싶으면 그냥 1번으로 하시면 됩니다. 아마 기본 설정일 거에요. *물론 Commit history가 깔끔할 수록 좋습니다...*
+1번은 commit history가 지저분해진다는 단점이 있지만 직관적이고, 2번은 깔끔하지만 모든 commit이 하나의 commit으로 합쳐지기 때문에 디테일이 떨어질 거에요.
 
 # 3. 사용 시 주의할점
 
 주의사항은 꼭 숙지 해 주세요. 생각 날 때 마다 업데이트 하겠습니다.
 
-### i) feature 브랜치는 열린 상태로 오래 유지되면 안된다.
-feature 브랜치가 열린 상태로 있다는 것은 develop 브랜치에 Merge되지 않은 상태로 깃헙이든 본인 local이든 존재한다는 것입니다. 닫혀있다는 것은 Merge가 되었다는 것이구요. feature 브랜치를 열린 생태로 너무 오래(1주이상) 두는 것은 바람직한 사용법이 아닙니다.
+### 3.1 feature 브랜치는 열린 상태로 오래 유지되면 안된다.
+feature 브랜치가 열린 상태로 있다는 것은 develop 브랜치에 Merge되지 않은 상태로 깃헙이든 본인 local이든 존재한다는 것입니다. 닫혀있다는 것은 Merge가 되었다는 것이구요. 하나의 작업이 끝날 때 마다 바로바로 PR 해주세요. 
 
-### ii) 공유 브랜치 주의사항
+### 3.2 공유 브랜치 주의사항
 만약 feature/vision이라는 브랜치를 만들었고, 이는 나만 작업하는 브랜치가 아닌 여러명이 작업하는 브랜치라고 가정합시다. 이렇게 되면 당연히 local에서 merge하는게 아니라 GitHub에 올려야 합니다. **공유브랜치에서 작업할 일이 생긴다면 좀 까다롭습니다.** 각자 개발해서 올리는 기존의 방식과 달리 함께 해야하니까요. 이 경우가 캡스톤에서 발생한다면, 그 때가서 어떻게 할 지 담당자들 간의 얘기가 필요합니다.
 
-### iii) 공유 파일 주의사항
+### 3.3 공유 파일 주의사항
 예를들어 ```hive_navigation.launch``` 파일을 여려명이서 작업한다고 가정합시다. 이 때는 각자 branch를 만드는 것이 아닌 공유 브랜치에서 작업 해야합니다. 구체적으로, **1번사람**이 100-200줄 사이를 수정하고, **2번사람**이 400-500줄 사이를 수정해야 하는데 각자 다른 branch에서 수정하고 merge or PR을 하면 충돌납니다. 경험상 Merge 충돌이 가장 자주 일어나는 경우가 ***"한 파일을 서로 다른 두 브랜치에서 작업하고 합칠 때*** 입니다. 다른 여려 경우도 있지만 이 경우가 제일 흔한거 같아요.
 
-### iv) 커밋규칙
+### 3.4 커밋규칙
 Commit Message를 잘 작성해 주세요. 자주 쓰는 키워드는 **볼드체**하였습니다.
 
 |키워드 |사용 시점 |
