@@ -89,6 +89,7 @@ PR방식은 총 3개로 나뉩니다.
 3. Rebase and merge
 
 3개에 대한 자세한 설명은 아래 5분정도 되는 영상을 보세요!
+
 [https://www.youtube.com/watch?v=UcZ3qvapfWw](https://www.youtube.com/watch?v=UcZ3qvapfWw)
 
 각자가 개발한 commit log에 맞게 3가지 중 선택하면 좋을 거 같아요!
