@@ -6,7 +6,7 @@ In the actual implementation, the two images run on different computers(Raspberr
 ## 1. Table robot
 ```bash
 cd docker
-docker build --no-cache --force-rm -f Dockerfile.table --build-arg HOST_USER=$USER -t IMAGENAME:TAG .
+docker build --no-cache --force-rm --build-arg HOST_USER=$USER -t IMAGENAME:TAG .
 ```
 
 ## 2. Vision-Platooning system
