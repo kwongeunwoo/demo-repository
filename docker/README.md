@@ -16,4 +16,4 @@ docker build --no-cache --force-rm --build-arg HOST_USER=$USER -t [YOUR IMAGENAM
 cd docker
 bash run_docker.sh [YOUR CONTAINER NAME] [YOUR IMAGE NAME:TAG]
 ```
-\[YOUR IMAGE NAME:TAG]\ must be the same name you used when image building.
+\[YOUR IMAGE NAME:TAG] must be the same name you used when image building.
