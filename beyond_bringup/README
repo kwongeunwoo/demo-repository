@@ -8,9 +8,9 @@
     
     ```
     
-### 그냥 아래꺼 받아 뭐 이것저것 수정함
+### ydlidar install
     
-    git clone -b
+    git clone -b https://github.com/kwongeunwoo/kwon-demo-repository.git
     
 
 ### 그 후 {$workspace_path}로 이동
