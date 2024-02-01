@@ -100,3 +100,11 @@
 #     user: ${USERNAME:-devuser}
 #     container_name: ${USER}-${REPO}-dev
 #     command: bash -c "bash"
+
+
+# Update from Ryu taehun
+# FROM nvidia/cudagl:11.1.1-devel-ubuntu20.04
+# FROM nvidia/cudagl:11.1.1-devel-ubuntu20.04
+# FROM nvidia/cudagl:11.1.1-devel-ubuntu20.04
+# FROM nvidia/cudagl:11.1.1-devel-ubuntu20.04
+# FROM nvidia/cudagl:11.1.1-devel-ubuntu20.04
