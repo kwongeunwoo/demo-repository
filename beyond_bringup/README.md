@@ -7,9 +7,9 @@
     git clone https://github.com/PinkWink/YDLidar-SDK.git
     
     
-### ydlidar install
+### ydlidar install(beyond_bringup에 있음)
     
-    git clone -b https://github.com/kwongeunwoo/kwon-demo-repository.git
+    git clone https://github.com/kwongeunwoo/kwon-demo-repository.git
     
 
 ### 그 후 {$workspace_path}로 이동
